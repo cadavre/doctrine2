@@ -430,6 +430,9 @@ class ObjectHydrator extends AbstractHydrator
                     if (isset($this->_rsm->indexByMap[$dqlAlias])) {
                         $field = $this->_rsm->indexByMap[$dqlAlias];
                         $key = $this->_ce[$entityName]->reflFields[$field]->getValue($element);
+                        if(is_object($key)) {
+                            $key = $key->getId();
+                        }
                         if ($this->_rsm->isMixed) {
                             $element = array($key => $element);
                             $result[] = $element;
